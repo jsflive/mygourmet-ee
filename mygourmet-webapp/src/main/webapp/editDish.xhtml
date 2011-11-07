@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:mg="http://at.irian/mygourmet"
+        xmlns:mc="http://java.sun.com/jsf/composite/mygourmet">
+<head>
+	<title>Edit provider</title>
+</head>
+<body>
+	<ui:composition template="/META-INF/templates/customerTemplate.xhtml">
+		<ui:param name="title" value="#{msgs.title_main} - #{msgs.title_edit_dish}"/>
+		<ui:define name="content">
+			<h2><h:outputText value="#{msgs.title_edit_dish}"/></h2>
+			<h:messages showDetail="true" showSummary="false"/>
+			<h:form id="form">
+				<h:panelGrid id="grid" columns="2">
+                    <h:outputLabel for="name" value="#{msgs.provider_name}:"/>
+                    <h:inputText id="name" value="#{providerBean.dish.name}" size="30"/>
+                    <h:outputLabel for="description" value="#{msgs.description}:"/>
+                    <h:inputTextarea id="description" value="#{providerBean.dish.description}" cols="30"/>
+                    <h:outputLabel for="price" value="#{msgs.price}:"/>
+                    <h:inputText id="price" value="#{providerBean.dish.price}" size="30"/>
+				</h:panelGrid>
+				<h:commandButton id="save" action="#{providerBean.saveDish}" value="#{msgs.save}"/>
+				<h:commandButton id="cancel" action="#{providerBean.cancelDish}" value="#{msgs.cancel}"
+                                 immediate="true"/>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

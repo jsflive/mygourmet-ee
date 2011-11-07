@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:cc="http://java.sun.com/jsf/composite">
+<head>
+    <title>A collapsible panel composite component</title>
+</head>
+<body>
+<cc:interface>
+    <cc:attribute name="text" default="Loading..."/>
+    <cc:attribute name="style"/>
+    <cc:attribute name="styleClass" default="ajax-progress"/>
+</cc:interface>
+<cc:implementation>
+    <h:outputStylesheet library="mygourmet" name="components.css"/>
+    <h:outputScript name="jsf.js" library="javax.faces" target="head"/>
+    <h:outputScript name="ajaxStatus.js" library="mygourmet" target="head"/>
+    <script type="text/javascript">
+    registerAjaxStatus('#{cc.clientId}:msg');
+    </script>
+    <div id="#{cc.clientId}:msg" class="#{cc.attrs.styleClass}" style="display: none;#{cc.attrs.style}">
+      #{cc.attrs.text}
+    </div>
+</cc:implementation>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:mg="http://at.irian/mygourmet"
+        xmlns:mc="http://java.sun.com/jsf/composite/mygourmet">
+<head>
+	<title>Edit provider</title>
+</head>
+<body>
+	<ui:composition template="/META-INF/templates/customerTemplate.xhtml">
+		<ui:param name="title" value="#{msgs.title_main} - #{msgs.title_edit_dish}"/>
+        <ui:define name="metadata">
+            <f:event type="javax.faces.event.PreRenderViewEvent" listener="#{orderBean.preRenderView}"/>
+        </ui:define>
+        
+		<ui:define name="content">
+			<h2><h:outputText value="#{msgs.title_order_dishes}: #{msgs.select_provider}"/></h2>
+			<h:messages showDetail="true" showSummary="false"/>
+			<h:form id="form">
+                <h:outputLabel value="#{msgs.provider}" for="providers"/>
+                <h:selectOneRadio id="providers" value="#{orderBean.provider}" required="true"
+                        layout="pageDirection" converter="#{providerConverter}">
+                    <f:selectItems value="#{orderBean.providers}" var="provider"
+                        itemLabel="#{provider.name}" itemValue="#{provider}"/>
+                </h:selectOneRadio>
+				<h:commandButton id="next" action="#{orderBean.gotoDishes}" value="#{msgs.next}"/>
+				<h:commandButton id="finish" action="#{orderBean.finish}" value="#{msgs.finish}" disabled="true"/>
+				<h:commandButton id="cancel" action="#{orderBean.cancel}" value="#{msgs.cancel}"
+                                 immediate="true"/>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

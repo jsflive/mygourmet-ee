@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<facelet-taglib version="2.0"
+        xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd">
+
+    <namespace>http://at.irian/mygourmet</namespace>
+
+    <function>
+        <function-name>getAge</function-name>
+        <function-class>
+            at.irian.jsfatwork.gui.util.MyGourmetUtil
+        </function-class>
+        <function-signature>
+            int getAge(java.util.Date)
+        </function-signature>
+    </function>
+
+    <tag>
+        <tag-name>convertZipCode</tag-name>
+        <converter>
+            <converter-id>at.irian.ZipCode</converter-id>
+        </converter>
+    </tag>
+
+    <tag>
+        <tag-name>convertList</tag-name>
+        <converter>
+            <converter-id>at.irian.List</converter-id>
+        </converter>
+    </tag>
+
+    <tag>
+        <tag-name>validateAge</tag-name>
+        <validator>
+            <validator-id>at.irian.Age</validator-id>
+        </validator>
+    </tag>
+
+    <tag>
+        <tag-name>inputSpinner</tag-name>
+        <component>
+            <component-type>at.irian.InputSpinner</component-type>
+            <renderer-type>at.irian.InputSpinner</renderer-type>
+            <handler-class>at.irian.jsfatwork.gui.jsf.component.InputSpinnerTagHandler</handler-class>
+        </component>
+    </tag>
+
+    <tag>
+        <tag-name>confirm</tag-name>
+        <behavior>
+            <behavior-id>at.irian.ConfirmBehavior</behavior-id>
+        </behavior>
+    </tag>
+
+</facelet-taglib>

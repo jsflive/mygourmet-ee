@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:mg="http://at.irian/mygourmet"
+        xmlns:mc="http://java.sun.com/jsf/composite/mygourmet">
+<head>
+	<title>Show Customer</title>
+</head>
+<body>
+	<ui:composition template="/META-INF/templates/customerTemplate.xhtml">
+		<ui:param name="title" value="#{msgs.title_main} - #{msgs.title_show_customer}"/>
+		<ui:define name="content">
+	    	<h2><h:outputText value="#{msgs.title_show_customer}"/></h2>
+			<h:form id="form">
+			<h:panelGrid id="grid" columns="2">
+                <h:outputText value="#{msgs.first_name}:"/>
+                <h:outputText value="#{customerBean.customer.firstName}"/>
+                <h:outputText value="#{msgs.last_name}:"/>
+                <h:outputText value="#{customerBean.customer.lastName}"/>
+                <h:outputText value="#{msgs.email}:"/>
+                <h:outputText value="#{customerBean.customer.email}"/>
+                <h:outputText value="#{msgs.birthday}:"/>
+				<h:outputText value="#{customerBean.customer.birthday}">
+					<f:convertDateTime pattern="dd.MM.yyyy"/>
+				</h:outputText>
+                <h:outputText value="#{msgs.age}" rendered="#{not empty customerBean.customer.birthday}"/>
+                <h:outputFormat value="#{msgs.age_msg}" rendered="#{not empty customerBean.customer.birthday}">
+                    <f:param value="#{mg:getAge(customerBean.customer.birthday)}"/>
+                </h:outputFormat>
+                <h:outputText value="#{msgs.gender}:"/>
+                <h:outputText value="#{customerBean.selectedGender}"/>
+				<h:outputText value="#{msgs.credit_card_type}:"
+						rendered="#{customerBean.customer.useCreditCard}"/>
+				<h:outputText value="#{customerBean.selectedCreditCardType}"
+						rendered="#{customerBean.customer.useCreditCard}"/>
+				<h:outputText value="#{msgs.credit_card_number}:"
+						rendered="#{customerBean.customer.useCreditCard}"/>
+				<h:outputText value="#{customerBean.customer.creditCardNumber}"
+						rendered="#{customerBean.customer.useCreditCard}"/>
+				<h:outputText value="#{msgs.preferred_categories}:"/>
+				<h:outputText value="#{customerBean.customer.preferredCategories}">
+                    <mg:convertList separator=", "/>
+                </h:outputText>
+			</h:panelGrid>
+			<h:panelGrid columns="1">
+				<h:outputFormat value="#{msgs.profile_msg}"
+						rendered="#{customerBean.customer.firstName != null}">
+					<f:param value="#{customerBean.customer.firstName}"/>
+					<f:param value="#{msgs.profile_active}"/>
+				</h:outputFormat>
+            <h:commandLink action="/editCustomer.xhtml" value="#{msgs.edit}"/>
+			</h:panelGrid>
+
+            <mc:collapsiblePanel id="addressPanel" collapsed="#{customerBean.collapsed}">
+                <f:facet name="header">
+                    <h3><h:outputText value="#{msgs.title_addresses}"/></h3>
+                </f:facet>
+                <h:commandLink action="#{customerBean.createAddress}" value="#{msgs.add_address}"/>
+                <mc:dataTable id="addresses" var="address" value="#{customerBean.customer.addresses}">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msgs.zip_code}"/>
+                        </f:facet>
+                        <h:outputText value="#{address.zipCode}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msgs.city}"/>
+                        </f:facet>
+                        <h:outputText value="#{address.city}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msgs.street}"/>
+                        </f:facet>
+                        <h:outputText value="#{address.street}"/>
+                    </h:column>
+                    <h:column>
+                        <h:commandLink action="#{customerBean.editAddress(address)}" value="#{msgs.edit}"/>
+                        &#160;
+                        <h:commandLink value="#{msgs.delete}"
+                                action="#{customerBean.deleteAddress(address)}">
+                            <f:ajax render=":form:addressPanel:addresses"/>
+                        </h:commandLink>
+                    </h:column>
+                </mc:dataTable>
+            </mc:collapsiblePanel>
+
+            <h3><h:outputText value="#{msgs.title_orders}"/></h3>
+            <h:commandLink action="#{orderBean.start(customerBean.customer.id)}" value="#{msgs.order_dishes}"/>
+            <mc:dataTable id="orders" var="order" value="#{customerBean.customer.orders}"
+                    emptyText="#{msgs.orders_empty}">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.order_date}"/>
+                    </f:facet>
+                    <h:outputText value="#{order.orderDate}">
+                        <f:convertDateTime pattern="dd.MM.yyyy"/>
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.provider_name}"/>
+                    </f:facet>
+                    <h:outputText value="#{order.provider.name}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="#{msgs.total_amount}"/>
+                    </f:facet>
+                    <h:outputText value="#{order.totalAmount}">
+                        <f:convertNumber pattern="#0.00"/>
+                    </h:outputText>
+                </h:column>
+            </mc:dataTable>
+            </h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

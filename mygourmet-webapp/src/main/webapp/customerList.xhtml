@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:mg="http://at.irian/mygourmet"
+      xmlns:mc="http://java.sun.com/jsf/composite/mygourmet">
+<head>
+    <title>Customer List</title>
+</head>
+<body>
+    <ui:composition template="/META-INF/templates/customerTemplate.xhtml">
+        <ui:param name="title" value="#{msgs.title_main} - #{msgs.title_customer_list}"/>
+
+        <ui:define name="content">
+            <h2><h:outputText value="#{msgs.title_customer_list}"/></h2>
+            <h:form id="form">
+                <h:commandLink value="#{msgs.add_customer}" action="/addCustomer1.xhtml"/>
+                <mc:dataTable id="customers" var="customer" value="#{customerListBean.customerList}">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msgs.name}"/>
+                        </f:facet>
+                        <h:commandLink value="#{customer.fullName}" action="#{customerBean.showCustomer(customer.id)}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msgs.email}"/>
+                        </f:facet>
+                        <h:outputText value="#{customer.email}"/>
+                    </h:column>
+                    <h:column>
+                        <h:commandLink value="#{msgs.delete}" action="#{customerListBean.deleteCustomer(customer)}">
+                            <f:ajax render="@form"/>
+                        </h:commandLink>
+                    </h:column>
+                </mc:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:mg="http://at.irian/mygourmet"
+      xmlns:mc="http://java.sun.com/jsf/composite/mygourmet">
+<head>
+    <title>Provider Details</title>
+</head>
+<body>
+    <ui:composition template="/META-INF/templates/customerTemplate.xhtml">
+        <ui:param name="title" value="#{msgs.title_main} - #{msgs.title_provider_details}"/>
+
+        <ui:define name="content">
+            <h:messages/>
+            <h2><h:outputText value="#{msgs.title_provider_details}"/></h2>
+            <h:form id="form">
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{msgs.provider_name}:"/>
+                    <h:outputText value="#{providerBean.provider.name}"/>
+                    <h:outputText value="#{msgs.stars}:"/>
+                    <h:outputText value="#{providerBean.provider.stars}"/>
+                    <h:outputText value="#{msgs.city}:"/>
+                    <h:outputText value="#{providerBean.provider.address.zipCode} #{providerBean.provider.address.city}"/>
+                    <h:outputText value="#{msgs.street}:"/>
+                    <h:outputText value="#{providerBean.provider.address.street}"/>
+                    <h:outputText value="#{msgs.categories}:"/>
+                    <h:outputText value="#{providerBean.provider.categories}">
+                        <mg:convertList separator=", "/>
+                    </h:outputText>
+                </h:panelGrid>
+                <h:commandLink value="#{msgs.edit}" action="/editProvider.xhtml"/>
+
+                <h3><h:outputText value="#{msgs.title_dishes}"/></h3>
+                <h:commandLink action="#{providerBean.createDish}" value="#{msgs.add_dish}"/>
+                <mc:dataTable id="dishes" var="dish" value="#{providerBean.provider.dishes}">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msgs.name}"/>
+                        </f:facet>
+                        <h:outputText value="#{dish.name}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msgs.price}"/>
+                        </f:facet>
+                        <h:outputText value="#{dish.price}">
+                            <f:convertNumber pattern="#0.00" />
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <h:commandLink action="#{providerBean.editDish(dish)}" value="#{msgs.edit}"/>
+                        &#160;
+                        <h:commandLink value="#{msgs.delete}"
+                                action="#{providerBean.deleteDish(dish)}">
+                            <f:ajax render=":form:dishes"/>
+                        </h:commandLink>
+                    </h:column>
+                </mc:dataTable>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</body>
+</html>

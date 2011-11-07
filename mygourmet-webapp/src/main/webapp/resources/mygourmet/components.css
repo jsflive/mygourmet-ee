@@ -1,0 +1,84 @@
+.mygourmet-table {
+    border-bottom: rgb(235, 230, 215) solid 2px;
+    border-collapse: separate;
+    border-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.mygourmet-table-header {
+    padding: 2px 5px 2px 5px;
+    font-weight: bold;
+    background-color: rgb(235, 230, 215);
+}
+
+.mygourmet-table-cell {
+    padding: 2px 5px 2px 5px;
+}
+
+.mygourmet-table-rownobg {
+}
+
+.mygourmet-table-rowbg {
+    background-color: rgb(248, 248, 235);
+}
+
+.box {
+	background-color: rgb(248, 248, 235);
+	display: block;
+	border: solid 1px rgb(126, 125, 123);
+	padding: 2px;
+	margin-bottom: 5px;
+}
+
+.box-header {
+    display: block;
+	margin: 0;
+	padding: 2px;
+	font-weight: bold;
+	background-color: rgb(235, 230, 215);
+}
+
+.panelImage {
+    display: block;
+    background-color: rgb(248, 248, 235);
+    padding: 5px;
+}
+
+.panelImage-img {
+    display: block;
+    width: 32px;
+    height: 32px;
+    background-color: white;
+    margin-right: 10px;
+    float: left;
+}
+
+.collapsiblePanel-header {
+    display:block;
+}
+
+.collapsiblePanel-img {
+    margin-top: 3px;
+    margin-right: 10px;
+    float: left;
+}
+
+.inputSpinner-input {
+    float: left;
+}
+
+.inputSpinner-buttons {
+    display: inline;
+    width: 17px;
+    float: left;
+}
+
+.inputSpinner-button {
+    display: block;
+}
+
+.ajax-progress {
+    background-color: red;
+    color: yellow;
+    padding: 3px;
+}

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:mc="http://java.sun.com/jsf/composite/mygourmet">
+<head>
+	<title>Default page</title>
+</head>
+<body>
+	<ui:composition template="template.xhtml">
+
+		<ui:define name="header">
+			<h:graphicImage name="images/logo.png"/>
+			<h1>#{msgs.title_main}</h1>
+            <mc:ajaxStatus style="float:right; width: 100px;"/>
+		</ui:define>
+
+		<ui:define name="left_sidebar">
+			<ui:include src="leftSideBar.xhtml"/>
+		</ui:define>
+		
+		<ui:define name="footer">
+			<h:outputText value="#{msgs.footer_left_text}" style="float: left;"/>
+			<h:outputText value="#{msgs.footer_right_text}" style="float: right"/>
+		</ui:define>
+		
+	</ui:composition>
+</body>
+</html>

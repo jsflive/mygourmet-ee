@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:insert name="metadata"/>
+<h:head>
+    <title>#{title}</title>
+</h:head>
+<h:body>
+    <h:outputStylesheet name="styles/mygourmet.css"/>
+    <h:outputScript library="javax.faces" name="jsf.js" target="head"/>
+	<div id="container">
+		<div id="header">
+			<ui:insert name="header">Default header</ui:insert>
+		</div>
+		
+		<div id="left_sidebar">
+			<ui:insert name="left_sidebar">Default left side bar</ui:insert>
+		</div>
+		
+		<div id="content">
+			<ui:insert name="content">Default content</ui:insert>
+		</div>
+
+		<div id="footer">
+			<ui:insert name="footer">Default footer</ui:insert>
+		</div>
+	</div>
+</h:body>
+</html>

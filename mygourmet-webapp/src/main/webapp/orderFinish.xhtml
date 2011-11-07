@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:mg="http://at.irian/mygourmet"
+        xmlns:mc="http://java.sun.com/jsf/composite/mygourmet">
+<head>
+	<title>Edit provider</title>
+</head>
+<body>
+	<ui:composition template="/META-INF/templates/customerTemplate.xhtml">
+		<ui:param name="title" value="#{msgs.title_main} - #{msgs.title_edit_dish}"/>
+		<ui:define name="content">
+			<h2><h:outputText value="#{msgs.title_order_dishes}: #{msgs.finish_order}"/></h2>
+			<h:messages showDetail="true" showSummary="false"/>
+            <h:outputText value="#{orderBean.order.provider.name}"/>
+			<h:form id="form">
+                <mc:dataTable value="#{orderBean.order.orderItems}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msgs.amount}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.amount}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msgs.dish}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.dish.name}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msgs.price}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.dish.price}">
+                            <f:convertNumber pattern="#0.00"/>
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{msgs.total_amount}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.amount * item.dish.price}">
+                            <f:convertNumber pattern="#0.00"/>
+                        </h:outputText>
+                    </h:column>
+                </mc:dataTable>
+                <h:outputFormat value="#{msgs.order_total_price}" style="display: block;margin: 5px 0 10px 0;font-weight: bold;">
+                    <f:param value="#{orderBean.order.totalAmount}"/>
+                </h:outputFormat>
+                <br/>
+				<h:commandButton id="finish" action="#{orderBean.finish}" value="#{msgs.finish}"/>
+				<h:commandButton id="cancel" action="#{orderBean.cancel}" value="#{msgs.cancel}"
+                                 immediate="true"/>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

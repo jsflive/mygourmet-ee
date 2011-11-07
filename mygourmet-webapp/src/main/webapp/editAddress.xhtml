@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:mg="http://at.irian/mygourmet">
+<head>
+	<title>Edit address</title>
+</head>
+<body>
+	<ui:composition template="/META-INF/templates/customerTemplate.xhtml">
+		<ui:param name="title" value="#{msgs.title_main} - #{msgs.title_edit_address}"/>
+		<ui:define name="content">
+			<h2><h:outputText value="#{msgs.title_edit_address}"/></h2>
+			<h:messages showDetail="true" showSummary="false" />
+			<h:form id="form">
+				<h:panelGrid id="grid" columns="2">
+					<h:outputLabel for="zipCode" value="#{msgs.zip_code}:"/>
+                    <h:inputText id="zipCode" size="30"
+                            value="#{customerBean.address.zipCode}">
+                        <mg:convertZipCode/>
+					</h:inputText>
+					<h:outputLabel for="city" value="#{msgs.city}:"/>
+					<h:inputText id="city" size="30" maxlength="40"
+						value="#{customerBean.address.city}"/>
+					<h:outputLabel for="street" value="#{msgs.street}:"/>
+					<h:inputText id="street" size="30" maxlength="40"
+						value="#{customerBean.address.street}"/>
+					<h:outputLabel for="country" value="#{msgs.country}:"/>
+					<h:inputText id="country" size="30" maxlength="40"
+						value="#{customerBean.address.country}"/>
+				</h:panelGrid>
+				<h:commandButton id="save" action="#{customerBean.saveAddress}" value="#{msgs.save}"/>
+				<h:commandButton id="cancel" action="#{customerBean.cancelAddress}" value="#{msgs.cancel}"
+                                 immediate="true"/>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

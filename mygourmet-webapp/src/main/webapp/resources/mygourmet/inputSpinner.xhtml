@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:cc="http://java.sun.com/jsf/composite">
+<head>
+    <title>An input with spinner</title>
+</head>
+<body>
+<cc:interface>
+    <cc:attribute name="value" required="true"/>
+    <cc:attribute name="inc" required="false" default="1"/>
+    <cc:editableValueHolder name="input"/>
+</cc:interface>
+<cc:implementation>
+    <h:outputStylesheet library="mygourmet" name="components.css" />
+    <h:outputScript library="mygourmet" name="inputSpinner.js" target="head"/>
+    <h:panelGroup>
+        <h:inputText id="input" value="#{cc.attrs.value}" styleClass="inputSpinner-input"/>
+        <h:panelGroup id="buttons" styleClass="inputSpinner-buttons">
+            <h:graphicImage library="mygourmet" name="spin-up.png" styleClass="inputSpinner-button"
+                    onclick="return changeNumber('#{cc.clientId}:input', #{cc.attrs.inc});"/>
+            <h:graphicImage library="mygourmet" name="spin-down.png" styleClass="inputSpinner-button"
+                    onclick="return changeNumber('#{cc.clientId}:input', #{-cc.attrs.inc});"/>
+        </h:panelGroup>
+    </h:panelGroup>
+</cc:implementation>
+</body>
+</html>

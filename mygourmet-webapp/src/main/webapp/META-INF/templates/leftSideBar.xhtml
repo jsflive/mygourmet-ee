@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:mc="http://java.sun.com/jsf/composite/mygourmet">
+<head>
+	<title>Left side bar</title>
+</head>
+<body>
+	<ui:composition>
+        <mc:panelBox id="menu">
+            <f:facet name="header">
+                <h:outputText value="#{msgs.menu_title}"/>
+            </f:facet>
+            <h:panelGrid columns="1">
+                <h:link outcome="providerList" value="#{msgs.menu_provider_list}"/>
+                <h:link outcome="customerList" value="#{msgs.menu_customer_list}"/>
+            </h:panelGrid>
+        </mc:panelBox>
+        <mc:panelBox id="news">
+            <f:facet name="header">
+                <h:outputText value="#{msgs.news_title}"/>
+            </f:facet>
+            <p>MyGourmet - jetzt mit Facelets und Templating</p>
+        </mc:panelBox>
+	</ui:composition>
+</body>
+</html>

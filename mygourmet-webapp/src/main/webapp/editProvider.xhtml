@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:mg="http://at.irian/mygourmet"
+        xmlns:mc="http://java.sun.com/jsf/composite/mygourmet">
+<head>
+	<title>Edit provider</title>
+</head>
+<body>
+	<ui:composition template="/META-INF/templates/customerTemplate.xhtml">
+		<ui:param name="title" value="#{msgs.title_main} - #{msgs.title_edit_provider}"/>
+		<ui:define name="content">
+			<h2><h:outputText value="#{msgs.title_edit_provider}"/></h2>
+			<h:messages showDetail="true" showSummary="false"/>
+			<h:form id="form">
+				<h:panelGrid id="grid" columns="2">
+                    <h:outputLabel for="name" value="#{msgs.provider_name}:"/>
+                    <h:inputText id="name" size="30" maxlength="40"
+                            value="#{providerBean.provider.name}"/>
+                    <h:outputLabel for="stars" value="#{msgs.stars}:"/>
+                    <mg:inputSpinner id="stars" value="#{providerBean.provider.stars}" inc="1"/>
+                    <h:outputLabel for="zipCode" value="#{msgs.zip_code}:"/>
+                    <h:inputText id="zipCode" size="30"
+                            value="#{providerBean.provider.address.zipCode}">
+                        <mg:convertZipCode/>
+                    </h:inputText>
+                    <h:outputLabel for="city" value="#{msgs.city}:"/>
+                    <h:inputText id="city" size="30" maxlength="40"
+                        value="#{providerBean.provider.address.city}"/>
+                    <h:outputLabel for="street" value="#{msgs.street}:"/>
+                    <h:inputText id="street" size="30" maxlength="40"
+                        value="#{providerBean.provider.address.street}"/>
+                    <h:outputLabel for="country" value="#{msgs.country}:"/>
+                    <h:inputText id="country" size="30" maxlength="40"
+                        value="#{providerBean.provider.address.country}"/>
+                    <h:outputLabel for="cats" value="#{msgs.categories}:"/>
+                    <h:selectManyListbox id="cats" value="#{providerBean.provider.categories}"
+                            converter="#{categoryConverter}">
+                        <f:attribute name="collectionType" value="java.util.HashSet"/>
+                        <f:selectItems value="#{providerBean.categoryItems}"/>
+                    </h:selectManyListbox>
+				</h:panelGrid>
+				<h:commandButton id="save" action="#{providerBean.saveProvider}" value="#{msgs.save}">
+                </h:commandButton>
+				<h:commandButton id="cancel" value="#{msgs.cancel}" action="#{providerBean.cancel}" immediate="true"/>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

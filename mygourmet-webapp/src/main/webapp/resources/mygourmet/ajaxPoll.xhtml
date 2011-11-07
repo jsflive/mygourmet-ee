@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:cc="http://java.sun.com/jsf/composite">
+<head>
+    <title>A collapsible panel composite component</title>
+</head>
+<body>
+<cc:interface>
+    <cc:attribute name="interval" required="true"/>
+</cc:interface>
+<cc:implementation>
+    <h:outputScript name="jsf.js" library="javax.faces" target="head"/>
+    <h:outputScript name="ajaxPoll.js" library="mygourmet" target="head"/>
+    <script type="text/javascript">
+    startAjaxPoll('#{cc.clientId}', #{cc.attrs.interval});
+    </script>
+    <div id="#{cc.clientId}">
+      <cc:insertChildren/>
+    </div>
+</cc:implementation>
+</body>
+</html>

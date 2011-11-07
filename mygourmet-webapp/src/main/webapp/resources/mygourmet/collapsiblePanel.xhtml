@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:cc="http://java.sun.com/jsf/composite">
+<head>
+    <title>A collapsible panel composite component</title>
+</head>
+<body>
+<cc:interface componentType="at.irian.CollapsiblePanel">
+    <cc:attribute name="collapsed"/>
+    <cc:actionSource name="toggle"/>
+    <cc:facet name="header"/>
+</cc:interface>
+<cc:implementation>
+    <h:panelGroup layout="block" styleClass="collapsiblePanel-header">
+        <h:commandButton id="toggle" actionListener="#{cc.toggle}" styleClass="collapsiblePanel-img"
+                image="#{resource[cc.collapsed ? 'mygourmet:toggle-plus.png' : 'mygourmet:toggle-minus.png']}">
+            <f:ajax render="@this panel-content"/>
+        </h:commandButton>
+        <cc:renderFacet name="header"/>
+    </h:panelGroup>
+    <h:panelGroup id="panel-content" layout="block">
+        <h:panelGroup rendered="#{!cc.collapsed}">
+            <cc:insertChildren/>
+        </h:panelGroup>
+    </h:panelGroup>
+</cc:implementation>
+</body>
+</html>
