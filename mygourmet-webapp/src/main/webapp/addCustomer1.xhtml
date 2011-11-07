@@ -43,7 +43,7 @@
                             value="#{addCustomerBean.customer.preferredCategories}"
                             converter="#{categoryConverter}">
                         <f:attribute name="collectionType" value="java.util.HashSet"/>
-                        <f:selectItems value="#{addCustomerBean.categories}"/>
+                        <f:selectItems value="#{categoryItems}"/>
                     </h:selectManyListbox>
                     <h:outputLabel for="useCreditCard" value="#{msgs.use_credit_card}:"/>
                     <h:selectBooleanCheckbox id="useCreditCard"
@@ -57,7 +57,7 @@
                             rendered="#{addCustomerBean.customer.useCreditCard}"/>
                     <h:selectOneListbox id="ccType" value="#{addCustomerBean.customer.creditCardType}"
                             rendered="#{addCustomerBean.customer.useCreditCard}">
-                        <f:selectItems value="#{addCustomerBean.creditCardTypes}"/>
+                        <f:selectItems value="#{creditCardItems}"/>
                         <f:event type="javax.faces.event.PostValidateEvent"
                                  listener="#{addCustomerBean.postValidateCCType}"/>
                     </h:selectOneListbox>
