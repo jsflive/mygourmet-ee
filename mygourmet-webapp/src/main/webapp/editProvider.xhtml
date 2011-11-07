@@ -41,7 +41,7 @@
                     <h:selectManyListbox id="cats" value="#{providerBean.provider.categories}"
                             converter="#{categoryConverter}">
                         <f:attribute name="collectionType" value="java.util.HashSet"/>
-                        <f:selectItems value="#{providerBean.categoryItems}"/>
+                        <f:selectItems value="#{categoryItems}"/>
                     </h:selectManyListbox>
 				</h:panelGrid>
 				<h:commandButton id="save" action="#{providerBean.saveProvider}" value="#{msgs.save}">

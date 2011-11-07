@@ -1,7 +1,7 @@
 package at.irian.jsfatwork.gui.page;
 
 import at.irian.jsfatwork.domain.Address;
-import at.irian.jsfatwork.gui.page.config.ShowCustomer;
+import at.irian.jsfatwork.gui.page.config.Pages;
 import at.irian.jsfatwork.service.CustomerService;
 import org.apache.myfaces.extensions.cdi.core.api.config.view.ViewConfig;
 import org.apache.myfaces.extensions.cdi.core.api.scope.conversation.ViewAccessScoped;
@@ -21,29 +21,29 @@ public class CustomerBean extends CustomerBeanBase {
 
     public Class<? extends ViewConfig> showCustomer(long id) {
         this.customer = customerService.findById(id);
-        return ShowCustomer.class;
+        return Pages.ShowCustomer.class;
     }
 
-	public String saveCustomer() {
+	public Class<? extends ViewConfig> saveCustomer() {
         customerService.save(customer);
-		return ViewIds.SHOW_CUSTOMER;
+		return Pages.ShowCustomer.class;
 	}
 
-	public String createAddress() {
+	public Class<? extends ViewConfig> createAddress() {
         this.address = customerService.createAddress(customer);
-        return ViewIds.EDIT_ADDRESS;
+        return Pages.EditAddress.class;
 	}
 
-    public String editAddress(Address address) {
+    public Class<? extends ViewConfig> editAddress(Address address) {
         this.address = address;
-        return ViewIds.EDIT_ADDRESS;
+        return Pages.EditAddress.class;
     }
 
-    public String saveAddress() {
+    public Class<? extends ViewConfig> saveAddress() {
         customerService.saveAddress(address);
         this.customer = customerService.findById(this.customer.getId());
         this.address = null;
-        return ViewIds.SHOW_CUSTOMER;
+        return Pages.ShowCustomer.class;
     }
 
     public String deleteAddress(Address address) {
@@ -51,9 +51,9 @@ public class CustomerBean extends CustomerBeanBase {
         return null;
     }
 
-    public String cancelAddress() {
+    public Class<? extends ViewConfig> cancelAddress() {
         this.address = null;
-        return ViewIds.SHOW_CUSTOMER;
+        return Pages.ShowCustomer.class;
     }
 
     public boolean isCollapsed() {

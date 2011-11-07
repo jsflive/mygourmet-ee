@@ -2,7 +2,7 @@ package at.irian.jsfatwork.gui.page;
 
 import at.irian.jsfatwork.domain.Address;
 import at.irian.jsfatwork.gui.page.config.AddCustomerWizard;
-import at.irian.jsfatwork.gui.page.config.CustomerList;
+import at.irian.jsfatwork.gui.page.config.Pages;
 import at.irian.jsfatwork.service.CustomerService;
 import org.apache.myfaces.extensions.cdi.core.api.config.view.ViewConfig;
 import org.apache.myfaces.extensions.cdi.core.api.scope.conversation.Conversation;
@@ -41,12 +41,12 @@ public class AddCustomerBean extends CustomerBeanBase {
     public Class<? extends ViewConfig> save() {
         customerService.save(customer);
         conversation.close();
-        return CustomerList.class;
+        return Pages.CustomerList.class;
     }
 
     public Class<? extends ViewConfig> cancel() {
         conversation.close();
-        return CustomerList.class;
+        return Pages.CustomerList.class;
     }
 
     public Address getAddress() {

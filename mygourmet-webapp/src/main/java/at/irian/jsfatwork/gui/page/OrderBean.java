@@ -1,6 +1,7 @@
 package at.irian.jsfatwork.gui.page;
 
 import at.irian.jsfatwork.domain.*;
+import at.irian.jsfatwork.gui.page.config.Pages;
 import at.irian.jsfatwork.gui.util.GuiUtil;
 import at.irian.jsfatwork.service.CustomerService;
 import at.irian.jsfatwork.service.ProviderService;
@@ -39,19 +40,19 @@ public class OrderBean implements Serializable {
         providers = providerService.findAll();
     }
 
-    public String start(long customerId) {
+    public Class<? extends ViewConfig> start(long customerId) {
         Customer customer = customerService.findById(customerId);
         order = customerService.createOrder(customer);
-        return ViewIds.ORDER_PROVIDER;
+        return Pages.OrderProvider.class;
     }
 
-    public String gotoDishes() {
+    public Class<? extends ViewConfig> gotoDishes() {
         dishes = initSelectableDishes();
         order.setProvider(provider);
-        return ViewIds.ORDER_DISHES;
+        return Pages.OrderDishes.class;
     }
 
-    public String gotoFinish() {
+    public Class<? extends ViewConfig> gotoFinish() {
         if (!createOrderItems()) {
             FacesContext ctx = FacesContext.getCurrentInstance();
             FacesMessage msg = GuiUtil.getFacesMessage(ctx, FacesMessage.SEVERITY_ERROR, "error_no_dishes");
@@ -59,7 +60,7 @@ public class OrderBean implements Serializable {
             return null;
         }
         dishes = initSelectableDishes();
-        return ViewIds.ORDER_FINISH;
+        return Pages.OrderFinish.class;
     }
 
     private boolean createOrderItems() {

@@ -45,7 +45,7 @@
                     </h:column>
                     <h:column>
                         <h:commandLink value="#{msgs.delete}" action="#{providerListBean.deleteProvider(provider)}">
-                            <f:ajax render="@form"/>
+                            <f:ajax render=":forms:providers"/>
                         </h:commandLink>
                     </h:column>
                 </mc:dataTable>

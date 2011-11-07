@@ -5,6 +5,7 @@ import org.apache.myfaces.extensions.cdi.core.api.config.view.ViewConfig;
 import org.apache.myfaces.extensions.cdi.jsf.api.config.view.Page;
 import org.apache.myfaces.extensions.cdi.jsf.api.config.view.PageBean;
 
+@SuppressWarnings({"CdiManagedBeanInconsistencyInspection"})
 @PageBean(AddCustomerBean.class)
 @Page(basePath = "")
 public interface AddCustomerWizard extends ViewConfig {
