@@ -1,7 +1,4 @@
-The example was tested with Glassfish 3.0.1. Unfortunately, the bundled version of Mojarra does not
-work correctly. So you have to upgrade JSF manually (worked with version 2.1.3). For this, go to
-folder /glassfish/modules in your Glassfish installation and replace jsf-api.jar and jsf-impl.jar
-with newer versions - that's it. Glassfish 3.1.1 did not work at all (loads of exceptions).
+The example was tested with Glassfish 3.1.1.
 
 Before deploying the application, database resources must be setup correctly.
 
