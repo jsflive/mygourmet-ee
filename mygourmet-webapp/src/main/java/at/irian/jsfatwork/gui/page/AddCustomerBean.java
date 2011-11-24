@@ -26,7 +26,8 @@ public class AddCustomerBean extends CustomerBeanBase {
     public void createCustomer() {
         if (customer == null) {
             customer = customerService.createNew();
-            address = customerService.createAddress(customer);
+            address = customerService.createAddress();
+            customer.addAddress(address);
         }
     }
 

@@ -51,7 +51,7 @@ public class ProviderBean implements Serializable {
     }
 
     public Class<? extends ViewConfig> createDish() {
-        this.dish = dishService.createNew(provider);
+        this.dish = dishService.createNew();
         return Pages.EditDish.class;
     }
 
@@ -61,7 +61,7 @@ public class ProviderBean implements Serializable {
     }
 
     public Class<? extends ViewConfig> saveDish() {
-        dishService.save(dish);
+        dishService.save(provider, dish);
         this.provider = providerService.findById(this.provider.getId());
         this.dish = null;
         return Pages.ShowProvider.class;

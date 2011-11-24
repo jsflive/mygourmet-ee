@@ -43,15 +43,14 @@ public class CustomerService {
         return crudService.findById(Customer.class, id);
     }
 
-    public Address createAddress(Customer customer) {
-        Address address = crudService.createNew(Address.class);
-        customer.addAddress(address);
-        return address;
+    public Address createAddress() {
+        return crudService.createNew(Address.class);
     }
 
-    public void saveAddress(Address address) {
-        crudService.merge(address.getCustomer());
+    public void saveAddress(Customer customer, Address address) {
         if (address.isTransient()) {
+            Customer mergedCustomer = crudService.merge(customer);
+            mergedCustomer.addAddress(address);
             crudService.persist(address);
         } else {
             crudService.merge(address);
@@ -66,15 +65,15 @@ public class CustomerService {
         crudService.delete(addressMerged);
     }
 
-    public Order createOrder(Customer customer) {
-        Order order = crudService.createNew(Order.class);
-        customer.addOrder(order);
-        return order;
+    public Order createOrder() {
+        return crudService.createNew(Order.class);
     }
 
-    public void saveOrder(Order order) {
+    public void saveOrder(Customer customer, Order order) {
         order.setOrderDate(new Date());
-        crudService.merge(order.getCustomer());
+        Customer mergedCustomer = crudService.merge(customer);
+        order.setCustomer(mergedCustomer);
+        mergedCustomer.getOrders().add(order);
         crudService.persist(order);
     }
 

@@ -30,7 +30,7 @@ public class CustomerBean extends CustomerBeanBase {
 	}
 
 	public Class<? extends ViewConfig> createAddress() {
-        this.address = customerService.createAddress(customer);
+        this.address = customerService.createAddress();
         return Pages.EditAddress.class;
 	}
 
@@ -40,7 +40,7 @@ public class CustomerBean extends CustomerBeanBase {
     }
 
     public Class<? extends ViewConfig> saveAddress() {
-        customerService.saveAddress(address);
+        customerService.saveAddress(customer, address);
         this.customer = customerService.findById(this.customer.getId());
         this.address = null;
         return Pages.ShowCustomer.class;

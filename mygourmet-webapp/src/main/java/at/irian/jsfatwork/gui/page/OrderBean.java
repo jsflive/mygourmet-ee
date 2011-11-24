@@ -31,6 +31,7 @@ public class OrderBean implements Serializable {
     @Inject
     private ProviderService providerService;
 
+    private Customer customer;
     private Order order;
     private Provider provider;
     private List<Provider> providers;
@@ -41,8 +42,8 @@ public class OrderBean implements Serializable {
     }
 
     public Class<? extends ViewConfig> start(long customerId) {
-        Customer customer = customerService.findById(customerId);
-        order = customerService.createOrder(customer);
+        customer = customerService.findById(customerId);
+        order = customerService.createOrder();
         return Pages.OrderProvider.class;
     }
 
@@ -78,15 +79,15 @@ public class OrderBean implements Serializable {
     }
 
     public Class<? extends ViewConfig> finish() {
-        customerService.saveOrder(order);
+        customerService.saveOrder(customer, order);
         conversation.close();
-        Long customerId = order.getCustomer().getId();
+        Long customerId = customer.getId();
         return customerBean.get().showCustomer(customerId);
     }
 
     public Class<? extends ViewConfig> cancel() {
         conversation.close();
-        Long customerId = order.getCustomer().getId();
+        Long customerId = customer.getId();
         return customerBean.get().showCustomer(customerId);
     }
 

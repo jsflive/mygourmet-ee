@@ -21,15 +21,10 @@ public class DishService {
         return crudService.createNew(Dish.class);
     }
 
-    public Dish createNew(Provider provider) {
-        Dish dish = createNew();
-        provider.addDish(dish);
-        return dish;
-    }
-
-    public void save(Dish dish) {
-        crudService.merge(dish.getProvider());
+    public void save(Provider provider, Dish dish) {
         if (dish.isTransient()) {
+            Provider mergedProvider = crudService.merge(provider);
+            mergedProvider.addDish(dish);
             crudService.persist(dish);
         } else {
             crudService.merge(dish);
